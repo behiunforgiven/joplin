@@ -1482,9 +1482,6 @@ packages/server/src/controllers/api/SessionController.js.map
 packages/server/src/controllers/api/UserController.d.ts
 packages/server/src/controllers/api/UserController.js
 packages/server/src/controllers/api/UserController.js.map
-packages/server/src/controllers/api/UserController.test.d.ts
-packages/server/src/controllers/api/UserController.test.js
-packages/server/src/controllers/api/UserController.test.js.map
 packages/server/src/controllers/factory.d.ts
 packages/server/src/controllers/factory.js
 packages/server/src/controllers/factory.js.map
@@ -1563,6 +1560,9 @@ packages/server/src/models/SessionModel.js.map
 packages/server/src/models/UserModel.d.ts
 packages/server/src/models/UserModel.js
 packages/server/src/models/UserModel.js.map
+packages/server/src/models/UserModel.test.d.ts
+packages/server/src/models/UserModel.test.js
+packages/server/src/models/UserModel.test.js.map
 packages/server/src/models/factory.d.ts
 packages/server/src/models/factory.js
 packages/server/src/models/factory.js.map

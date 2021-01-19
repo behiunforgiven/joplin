@@ -6,7 +6,6 @@ import useScroll from './utils/useScroll';
 import styles_ from './styles';
 import CommandService from '@joplin/lib/services/CommandService';
 import { ToolbarButtonInfo } from '@joplin/lib/services/commands/ToolbarButtonUtils';
-import ToggleEditorsButton, { Value as ToggleEditorsButtonValue } from '../../../ToggleEditorsButton/ToggleEditorsButton';
 import ToolbarButton from '../../../../gui/ToolbarButton/ToolbarButton';
 import usePluginServiceRegistration from '../../utils/usePluginServiceRegistration';
 import { utils as pluginUtils } from '@joplin/lib/services/plugins/reducer';
@@ -532,7 +531,7 @@ const TinyMCE = (props: NoteBodyEditorProps, ref: any) => {
 			const toolbarPluginButtons = pluginCommandNames.length ? ` | ${pluginCommandNames.join(' ')}` : '';
 
 			const toolbar = [
-				'bold', 'italic', '|',
+				'bold', 'italic', '|', 'alignLeft','alignCenter','alignRight', '|' , 'fontselect' , 'styleselect', '|' , 'rtl' , 'ltr',
 				'link', 'joplinInlineCode', 'joplinCodeBlock', 'joplinAttach', '|',
 				'bullist', 'numlist', 'joplinChecklist', '|',
 				'h1', 'h2', 'h3', 'hr', 'blockquote', 'table', `joplinInsertDateTime${toolbarPluginButtons}`,
@@ -546,7 +545,7 @@ const TinyMCE = (props: NoteBodyEditorProps, ref: any) => {
 				resize: false,
 				icons: 'Joplin',
 				icons_url: 'gui/NoteEditor/NoteBody/TinyMCE/icons.js',
-				plugins: 'noneditable link joplinLists hr searchreplace codesample table',
+				plugins: 'noneditable link joplinLists hr searchreplace codesample table directionality',
 				noneditable_noneditable_class: 'joplin-editable', // Can be a regex too
 				valid_elements: '*[*]', // We already filter in sanitize_html
 				menubar: false,
@@ -555,7 +554,7 @@ const TinyMCE = (props: NoteBodyEditorProps, ref: any) => {
 				statusbar: false,
 				target_list: false,
 				table_resize_bars: false,
-				language: ['en_US', 'en_GB'].includes(language) ? undefined : language,
+				language: ['en_US', 'fa_IR'].includes(language) ? undefined : language,
 				toolbar: toolbar.join(' '),
 				localization_function: _,
 				contextmenu: false,
@@ -897,13 +896,14 @@ const TinyMCE = (props: NoteBodyEditorProps, ref: any) => {
 
 		nextOnChangeEventInfo.current = null;
 
-		const contentMd = await prop_htmlToMarkdownRef.current(info.contentMarkupLanguage, info.editor.getContent(), info.contentOriginalCss);
+		// const contentMd = await prop_htmlToMarkdownRef.current(info.contentMarkupLanguage, info.editor.getContent(), info.contentOriginalCss);
+		const contentHtml = info.editor.getContent();
 
-		lastOnChangeEventInfo.current.content = contentMd;
+		lastOnChangeEventInfo.current.content = contentHtml;
 
 		props_onChangeRef.current({
 			changeId: info.changeId,
-			content: contentMd,
+			content: contentHtml,
 		});
 
 		dispatchDidUpdate(info.editor);
@@ -1106,12 +1106,12 @@ const TinyMCE = (props: NoteBodyEditorProps, ref: any) => {
 			if (leftButtonCommandNames.includes(info.name)) continue;
 
 			if (info.name === 'toggleEditors') {
-				buttons.push(<ToggleEditorsButton
-					key={info.name}
-					value={ToggleEditorsButtonValue.RichText}
-					themeId={props.themeId}
-					toolbarButtonInfo={info}
-				/>);
+				// buttons.push(<ToggleEditorsButton
+				// 	key={info.name}
+				// 	value={ToggleEditorsButtonValue.RichText}
+				// 	themeId={props.themeId}
+				// 	toolbarButtonInfo={info}
+				// />);
 			} else {
 				buttons.push(renderExtraToolbarButton(info.name, info));
 			}
